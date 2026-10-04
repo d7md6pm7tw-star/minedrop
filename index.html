@@ -21,6 +21,7 @@
     padding: 0;
     min-height: 100%;
     background-color: #000000;
+    overflow-x: hidden;
   }
 
   body {
@@ -42,7 +43,6 @@
     margin: 0 0 20px 0;
   }
 
-  /* Счётчик монет вверху */
   .coin-counter {
     display: flex;
     align-items: center;
@@ -108,6 +108,13 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .case-box:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #3f3f3f, 4px 4px 0 #1a1a1a;
   }
 
   .case-image {
@@ -115,9 +122,9 @@
     object-fit: contain;
     image-rendering: pixelated;
     mix-blend-mode: multiply;
+    pointer-events: none;
   }
 
-  /* Цена кейса под прямоугольником */
   .case-price {
     display: flex;
     align-items: center;
@@ -144,45 +151,352 @@
     text-shadow: 2px 2px 0 #3f3f3f;
     user-select: none;
   }
+
+  .screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  .screen.active {
+    display: flex;
+  }
+
+  #earth-screen {
+    padding: 40px 20px;
+  }
+
+  /* ===== РУЛЕТКА ===== */
+  .roulette-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .roulette-window {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 3px solid #8a8a8a;
+    box-shadow: 4px 4px 0 #3f3f3f, 8px 8px 0 #1a1a1a;
+  }
+
+  .roulette-strip {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    transform: translateX(0);
+    will-change: transform;
+  }
+
+  /* Ячейка — рамка как фон */
+  .roulette-item {
+    flex: 0 0 auto;
+    width: 120px;
+    height: 120px;
+    margin: 0 5px;
+    border-radius: 12px;
+    background-image: url('https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/IMG_9658.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Предмет внутри рамки (пока пусто) */
+  .roulette-item img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Красная линия указателя */
+  .roulette-pointer {
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 50%;
+    width: 4px;
+    background: #ff2020;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px #ff2020, 0 0 20px #ff2020;
+    z-index: 10;
+    pointer-events: none;
+    border-radius: 2px;
+  }
+
+  .roulette-pointer::before,
+  .roulette-pointer::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+  .roulette-pointer::before {
+    top: -12px;
+    border-top: 12px solid #ff2020;
+  }
+
+  .roulette-pointer::after {
+    bottom: -12px;
+    border-bottom: 12px solid #ff2020;
+  }
+
+  .open-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 320px;
+    padding: 18px 20px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 20px;
+    box-shadow: 4px 4px 0 #3f3f3f, 8px 8px 0 #1a1a1a;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    box-sizing: border-box;
+    margin-top: 20px;
+  }
+
+  .open-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #3f3f3f, 4px 4px 0 #1a1a1a;
+  }
+
+  .open-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .open-button-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    user-select: none;
+  }
+
+  .open-button-coin {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    cursor: pointer;
+    margin-top: 30px;
+    font-family: 'Minecraft', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+  }
+
+  .back-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #3f3f3f, 2px 2px 0 #1a1a1a;
+  }
+
+  .result-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 24px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .result-label.show {
+    opacity: 1;
+  }
 </style>
 </head>
 <body>
 
-  <h1 class="minecraft-title">Mine Drop</h1>
+  <div id="main-screen" class="screen active">
 
-  <!-- Счётчик монет вверху -->
-  <div class="coin-counter">
-    <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="coin-icon">
-    <span class="coin-amount">100</span>
+    <h1 class="minecraft-title">Mine Drop</h1>
+
+    <div class="coin-counter">
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="coin-icon">
+      <span class="coin-amount">100</span>
+    </div>
+
+    <div class="cases">
+
+      <div class="case-block">
+        <div class="case-label">Земляной кейс</div>
+        <div class="case-box" onclick="openEarthCase()">
+          <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/earth_case.jpeg" alt="Земляной кейс" class="case-image">
+        </div>
+        <div class="case-price">
+          <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="price-coin">
+          <span class="price-amount">300</span>
+        </div>
+      </div>
+
+      <div class="case-block">
+        <div class="case-label">Золотой кейс</div>
+        <div class="case-box">
+          <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/gold_case.jpeg" alt="Золотой кейс" class="case-image">
+        </div>
+        <div class="case-price">
+          <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="price-coin">
+          <span class="price-amount">700</span>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="cases">
+  <div id="earth-screen" class="screen">
 
-    <!-- Земляной кейс -->
-    <div class="case-block">
-      <div class="case-label">Земляной кейс</div>
-      <div class="case-box">
-        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/earth_case.jpeg" alt="Земляной кейс" class="case-image">
-      </div>
-      <div class="case-price">
-        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="price-coin">
-        <span class="price-amount">300</span>
+    <h1 class="minecraft-title">Земляной сундук</h1>
+
+    <div class="roulette-wrapper">
+      <div class="roulette-window">
+        <div class="roulette-strip" id="roulette-strip"></div>
+        <div class="roulette-pointer"></div>
       </div>
     </div>
 
-    <!-- Золотой кейс -->
-    <div class="case-block">
-      <div class="case-label">Золотой кейс</div>
-      <div class="case-box">
-        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/gold_case.jpeg" alt="Золотой кейс" class="case-image">
-      </div>
-      <div class="case-price">
-        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="price-coin">
-        <span class="price-amount">700</span>
-      </div>
+    <div class="result-label" id="result-label"></div>
+
+    <div class="open-button" id="open-button" onclick="spinRoulette()">
+      <span class="open-button-text">Открыть за 300</span>
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="open-button-coin">
     </div>
 
+    <button class="back-button" onclick="goBack()">← Назад</button>
+
   </div>
+
+<script>
+  // ===== НАСТРОЙКИ =====
+  const ITEM_WIDTH = 130;
+  const ITEM_COUNT = 30;
+  const SPIN_TIME = 4000;
+
+  // Рамка (фон ячейки) уже в CSS. Здесь — только предметы, которые могут выпасть.
+  // Пока список пустой — предметов нет, только рамки.
+  const ITEMS = [
+    // { img: "ссылка_на_предмет", name: "Название" },
+    // Пример на будущее:
+    // { img: "https://.../dirt.png", name: "Земля" },
+    // { img: "https://.../gold.png", name: "Золото" },
+  ];
+
+  let isSpinning = false;
+
+  function buildStrip() {
+    const strip = document.getElementById('roulette-strip');
+    strip.innerHTML = '';
+    for (let i = 0; i < ITEM_COUNT; i++) {
+      const item = document.createElement('div');
+      item.className = 'roulette-item';
+
+      // Если есть предметы — случайно выбираем один
+      if (ITEMS.length > 0) {
+        const randomItem = ITEMS[Math.floor(Math.random() * ITEMS.length)];
+        const img = document.createElement('img');
+        img.src = randomItem.img;
+        img.alt = randomItem.name;
+        item.appendChild(img);
+      }
+
+      strip.appendChild(item);
+    }
+  }
+
+  function openEarthCase() {
+    document.getElementById('main-screen').classList.remove('active');
+    document.getElementById('earth-screen').classList.add('active');
+    window.scrollTo(0, 0);
+    buildStrip();
+  }
+
+  function goBack() {
+    document.getElementById('earth-screen').classList.remove('active');
+    document.getElementById('main-screen').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function spinRoulette() {
+    if (isSpinning) return;
+    isSpinning = true;
+
+    const strip = document.getElementById('roulette-strip');
+    const openButton = document.getElementById('open-button');
+    const resultLabel = document.getElementById('result-label');
+
+    openButton.disabled = true;
+    resultLabel.classList.remove('show');
+    resultLabel.textContent = '';
+
+    strip.style.transition = 'none';
+    strip.style.transform = 'translateX(0)';
+
+    setTimeout(() => {
+      const winIndex = Math.floor(Math.random() * (ITEM_COUNT - 10)) + 5;
+      const windowWidth = strip.parentElement.offsetWidth;
+      const centerOffset = windowWidth / 2;
+      const itemCenter = winIndex * ITEM_WIDTH + ITEM_WIDTH / 2;
+      const finalTranslate = centerOffset - itemCenter;
+
+      strip.style.transition = `transform ${SPIN_TIME}ms cubic-bezier(0.15, 0.85, 0.35, 1)`;
+      strip.style.transform = `translateX(${finalTranslate}px)`;
+
+      setTimeout(() => {
+        // Если есть предметы — показываем название, иначе просто "Рамка"
+        const winItem = ITEMS.length > 0
+          ? ITEMS[Math.floor(Math.random() * ITEMS.length)].name
+          : 'Рамка';
+        resultLabel.textContent = '🎁 ' + winItem + '!';
+        resultLabel.classList.add('show');
+        isSpinning = false;
+        openButton.disabled = false;
+      }, SPIN_TIME + 100);
+    }, 50);
+  }
+</script>
 
 </body>
 </html>
