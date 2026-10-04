@@ -39,7 +39,35 @@
     text-transform: uppercase;
     text-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
     text-align: center;
-    margin: 0 0 60px 0;
+    margin: 0 0 20px 0;
+  }
+
+  /* Счётчик монет */
+  .coin-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 15px;
+    padding: 6px 16px 6px 6px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    margin-bottom: 50px;
+  }
+
+  .coin-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .coin-amount {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    user-select: none;
   }
 
   .cases {
@@ -93,6 +121,12 @@
 <body>
 
   <h1 class="minecraft-title">Mine Drop</h1>
+
+  <!-- Счётчик монет -->
+  <div class="coin-counter">
+    <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="coin-icon">
+    <span class="coin-amount">100</span>
+  </div>
 
   <div class="cases">
 
