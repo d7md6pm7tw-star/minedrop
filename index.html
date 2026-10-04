@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mine Drop</title>
+<style>
+  @font-face {
+    font-family: 'Minecraft';
+    src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft-regular.woff2') format('woff2');
+    font-weight: normal;
+  }
+  @font-face {
+    font-family: 'Minecraft';
+    src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/files/minecraft-bold.woff2') format('woff2');
+    font-weight: bold;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: #000000;
+  }
+
+  body {
+    font-family: 'Minecraft', 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0 60px 0;
+  }
+
+  .minecraft-title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    text-align: center;
+    margin: 0 0 60px 0;
+  }
+
+  .cases {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .case-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .case-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    text-align: center;
+  }
+
+  .case-box {
+    width: 100%;
+    height: 140px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    box-shadow: 4px 4px 0 #3f3f3f, 8px 8px 0 #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .case-image {
+    height: 90%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    mix-blend-mode: multiply;
+  }
+</style>
+</head>
+<body>
+
+  <h1 class="minecraft-title">Mine Drop</h1>
+
+  <div class="cases">
+
+    <div class="case-block">
+      <div class="case-label">Земляной кейс</div>
+      <div class="case-box">
+        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/earth_case.jpeg" alt="Земляной кейс" class="case-image">
+      </div>
+    </div>
+
+    <div class="case-block">
+      <div class="case-label">Золотой кейс</div>
+      <div class="case-box">
+        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/gold_case.jpeg" alt="Золотой кейс" class="case-image">
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
