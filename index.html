@@ -42,7 +42,7 @@
     margin: 0 0 20px 0;
   }
 
-  /* Счётчик монет */
+  /* Счётчик монет вверху */
   .coin-counter {
     display: flex;
     align-items: center;
@@ -116,13 +116,41 @@
     image-rendering: pixelated;
     mix-blend-mode: multiply;
   }
+
+  /* Цена кейса под прямоугольником */
+  .case-price {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 2px solid #8a8a8a;
+    border-radius: 12px;
+    padding: 4px 12px 4px 4px;
+    box-shadow: 2px 2px 0 #3f3f3f, 4px 4px 0 #1a1a1a;
+  }
+
+  .price-coin {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .price-amount {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    user-select: none;
+  }
 </style>
 </head>
 <body>
 
   <h1 class="minecraft-title">Mine Drop</h1>
 
-  <!-- Счётчик монет -->
+  <!-- Счётчик монет вверху -->
   <div class="coin-counter">
     <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="coin-icon">
     <span class="coin-amount">100</span>
@@ -130,17 +158,27 @@
 
   <div class="cases">
 
+    <!-- Земляной кейс -->
     <div class="case-block">
       <div class="case-label">Земляной кейс</div>
       <div class="case-box">
         <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/earth_case.jpeg" alt="Земляной кейс" class="case-image">
       </div>
+      <div class="case-price">
+        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="price-coin">
+        <span class="price-amount">300</span>
+      </div>
     </div>
 
+    <!-- Золотой кейс -->
     <div class="case-block">
       <div class="case-label">Золотой кейс</div>
       <div class="case-box">
         <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/gold_case.jpeg" alt="Золотой кейс" class="case-image">
+      </div>
+      <div class="case-price">
+        <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="price-coin">
+        <span class="price-amount">700</span>
       </div>
     </div>
 
