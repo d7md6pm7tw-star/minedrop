@@ -16,7 +16,7 @@
     font-weight: bold;
   }
 
-  html, body {
+  html {
     margin: 0;
     padding: 0;
     min-height: 100%;
@@ -25,11 +25,23 @@
   }
 
   body {
+    margin: 0;
+    padding: 40px 0 60px 0;
+    min-height: 100vh;
     font-family: 'Minecraft', 'Courier New', monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0 60px 0;
+    box-sizing: border-box;
+
+    background-color: #000000;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.18) 0%, transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.14) 0%, transparent 45%),
+      radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.17) 0%, transparent 40%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
 
   .minecraft-title {
@@ -40,7 +52,7 @@
     text-transform: uppercase;
     text-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
     text-align: center;
-    margin: 0 0 20px 0;
+    margin: 40px 0 20px 0;
   }
 
   .coin-counter {
@@ -165,11 +177,10 @@
     display: flex;
   }
 
-  #earth-screen {
+  #earth-screen, #gold-screen {
     padding: 40px 20px;
   }
 
-  /* ===== РУЛЕТКА ===== */
   .roulette-wrapper {
     position: relative;
     width: 100%;
@@ -199,7 +210,6 @@
     will-change: transform;
   }
 
-  /* Ячейка — рамка как фон */
   .roulette-item {
     flex: 0 0 auto;
     width: 120px;
@@ -218,7 +228,6 @@
     position: relative;
   }
 
-  /* Предмет внутри рамки (пока пусто) */
   .roulette-item img {
     width: 55%;
     height: 55%;
@@ -228,7 +237,6 @@
     z-index: 2;
   }
 
-  /* Красная линия указателя */
   .roulette-pointer {
     position: absolute;
     top: -10px;
@@ -346,9 +354,254 @@
   .result-label.show {
     opacity: 1;
   }
+
+  /* ===== БОКОВОЕ МЕНЮ ===== */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background: #1a1a1a;
+    border-right: 3px solid #8a8a8a;
+    box-shadow: 6px 0 0 #3f3f3f;
+    padding-top: 100px;
+    box-sizing: border-box;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 900;
+    overflow-y: auto;
+  }
+
+  .side-menu.open {
+    transform: translateX(0);
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    margin: 0 16px 12px 16px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    font-family: 'Minecraft', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .menu-item:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #3f3f3f, 2px 2px 0 #1a1a1a;
+  }
+
+  .menu-item-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 800;
+  }
+
+  .overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ===== ОКНО ПРОМОКОДОВ ===== */
+  .promo-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .promo-screen.open {
+    display: flex;
+  }
+
+  .promo-box {
+    width: 280px;
+    max-width: 90%;
+    background: #1a1a1a;
+    border: 3px solid #8a8a8a;
+    border-radius: 20px;
+    box-shadow: 6px 6px 0 #3f3f3f;
+    padding: 30px 20px 25px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .promo-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #3f3f3f;
+    text-align: center;
+    margin: 0;
+  }
+
+  .promo-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Minecraft', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #2a2a2a;
+    border: 3px solid #8a8a8a;
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 0 #0a0a0a;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+  }
+
+  .promo-input::placeholder {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .promo-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 40px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 15px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    cursor: pointer;
+    font-family: 'Minecraft', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    user-select: none;
+  }
+
+  .promo-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #3f3f3f, 2px 2px 0 #1a1a1a;
+  }
+
+  .promo-result {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    min-height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .promo-result.show {
+    opacity: 1;
+  }
+
+  .promo-result.error {
+    color: #ff4040;
+    text-shadow: 2px 2px 0 #3f0000;
+  }
+
+  .promo-result.success {
+    color: #40ff40;
+    text-shadow: 2px 2px 0 #003f00;
+  }
+
+  .promo-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    user-select: none;
+    z-index: 1001;
+  }
+
+  .promo-close:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #3f3f3f, 2px 2px 0 #1a1a1a;
+  }
 </style>
 </head>
 <body>
+
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="side-menu" id="side-menu">
+    <div class="menu-item" onclick="menuClick('Кейсы')">📦 Кейсы</div>
+    <div class="menu-item" onclick="menuClick('Инвентарь')">
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/IMG_9672.PNG" alt="Инвентарь" class="menu-item-icon">
+      Инвентарь
+    </div>
+    <div class="menu-item" onclick="menuClick('Профиль')">
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/IMG_9675.JPG" alt="Профиль" class="menu-item-icon">
+      Профиль
+    </div>
+    <div class="menu-item" onclick="openPromo()">
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/IMG_9678.WEBP" alt="Промокоды" class="menu-item-icon">
+      Промокоды
+    </div>
+  </div>
+
+  <div onclick="toggleMenu()" style="position:fixed;top:20px;left:20px;z-index:999;cursor:pointer;">
+    <div style="width:44px;height:44px;background:linear-gradient(180deg,#d9d9d9 0%,#b0b0b0 100%);border:3px solid #8a8a8a;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;box-shadow:3px 3px 0 #3f3f3f,6px 6px 0 #1a1a1a;">
+      <div style="width:24px;height:3px;background:#fff;border-radius:2px;"></div>
+      <div style="width:24px;height:3px;background:#fff;border-radius:2px;"></div>
+      <div style="width:24px;height:3px;background:#fff;border-radius:2px;"></div>
+    </div>
+  </div>
+
+  <!-- ===== ОКНО ПРОМОКОДОВ ===== -->
+  <div class="promo-screen" id="promo-screen">
+    <div class="promo-close" onclick="closePromo()">✕</div>
+    <div class="promo-box">
+      <h2 class="promo-title">Промокоды</h2>
+      <input type="text" class="promo-input" id="promo-input" placeholder="Введите промокод" autocomplete="off">
+      <div class="promo-result" id="promo-result"></div>
+      <div class="promo-button" onclick="applyPromo()">Применить</div>
+    </div>
+  </div>
 
   <div id="main-screen" class="screen active">
 
@@ -356,7 +609,7 @@
 
     <div class="coin-counter">
       <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="coin-icon">
-      <span class="coin-amount">100</span>
+      <span class="coin-amount" id="coin-display">100</span>
     </div>
 
     <div class="cases">
@@ -374,7 +627,7 @@
 
       <div class="case-block">
         <div class="case-label">Золотой кейс</div>
-        <div class="case-box">
+        <div class="case-box" onclick="openGoldCase()">
           <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/gold_case.jpeg" alt="Золотой кейс" class="case-image">
         </div>
         <div class="case-price">
@@ -393,49 +646,146 @@
 
     <div class="roulette-wrapper">
       <div class="roulette-window">
-        <div class="roulette-strip" id="roulette-strip"></div>
+        <div class="roulette-strip" id="earth-strip"></div>
         <div class="roulette-pointer"></div>
       </div>
     </div>
 
-    <div class="result-label" id="result-label"></div>
+    <div class="result-label" id="earth-result"></div>
 
-    <div class="open-button" id="open-button" onclick="spinRoulette()">
+    <div class="open-button" id="earth-open-button" onclick="spinRoulette('earth')">
       <span class="open-button-text">Открыть за 300</span>
       <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="open-button-coin">
     </div>
 
-    <button class="back-button" onclick="goBack()">← Назад</button>
+    <button class="back-button" onclick="goBack('earth')">← Назад</button>
+
+  </div>
+
+  <div id="gold-screen" class="screen">
+
+    <h1 class="minecraft-title">Золотой сундук</h1>
+
+    <div class="roulette-wrapper">
+      <div class="roulette-window">
+        <div class="roulette-strip" id="gold-strip"></div>
+        <div class="roulette-pointer"></div>
+      </div>
+    </div>
+
+    <div class="result-label" id="gold-result"></div>
+
+    <div class="open-button" id="gold-open-button" onclick="spinRoulette('gold')">
+      <span class="open-button-text">Открыть за 700</span>
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/coins.PNG" alt="Монеты" class="open-button-coin">
+    </div>
+
+    <button class="back-button" onclick="goBack('gold')">← Назад</button>
 
   </div>
 
 <script>
-  // ===== НАСТРОЙКИ =====
   const ITEM_WIDTH = 130;
   const ITEM_COUNT = 30;
   const SPIN_TIME = 4000;
 
-  // Рамка (фон ячейки) уже в CSS. Здесь — только предметы, которые могут выпасть.
-  // Пока список пустой — предметов нет, только рамки.
-  const ITEMS = [
-    // { img: "ссылка_на_предмет", name: "Название" },
-    // Пример на будущее:
-    // { img: "https://.../dirt.png", name: "Земля" },
-    // { img: "https://.../gold.png", name: "Золото" },
-  ];
+  const EARTH_ITEMS = [];
+  const GOLD_ITEMS = [];
+
+  const EARTH_PRICE = 300;
+  const GOLD_PRICE = 700;
+
+  const PROMOCODES = {
+    'wipe': { coins: 700 }
+  };
 
   let isSpinning = false;
 
-  function buildStrip() {
-    const strip = document.getElementById('roulette-strip');
+  let coins = parseInt(localStorage.getItem('minedrop_coins'));
+  if (isNaN(coins)) {
+    coins = 100;
+    localStorage.setItem('minedrop_coins', coins);
+  }
+
+  let usedPromos = JSON.parse(localStorage.getItem('minedrop_used_promos') || '[]');
+
+  function updateCoinDisplay() {
+    document.getElementById('coin-display').textContent = coins;
+  }
+
+  function saveCoins() {
+    localStorage.setItem('minedrop_coins', coins);
+  }
+
+  function toggleMenu() {
+    document.getElementById('side-menu').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+  }
+
+  function menuClick(name) {
+    // Пока кнопки ничего не делают
+  }
+
+  function openPromo() {
+    document.getElementById('side-menu').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+    document.getElementById('promo-screen').classList.add('open');
+    document.getElementById('promo-input').value = '';
+    document.getElementById('promo-result').classList.remove('show', 'error', 'success');
+    document.getElementById('promo-result').textContent = '';
+  }
+
+  function closePromo() {
+    document.getElementById('promo-screen').classList.remove('open');
+  }
+
+  function applyPromo() {
+    const input = document.getElementById('promo-input');
+    const result = document.getElementById('promo-result');
+    const code = input.value.trim().toLowerCase();
+
+    result.classList.remove('show', 'error', 'success');
+    result.textContent = '';
+
+    if (!code) {
+      result.textContent = 'Введите промокод';
+      result.classList.add('show', 'error');
+      return;
+    }
+
+    if (usedPromos.includes(code)) {
+      result.textContent = 'Промокод уже использован';
+      result.classList.add('show', 'error');
+      return;
+    }
+
+    if (PROMOCODES[code]) {
+      coins += PROMOCODES[code].coins;
+      saveCoins();
+      updateCoinDisplay();
+
+      usedPromos.push(code);
+      localStorage.setItem('minedrop_used_promos', JSON.stringify(usedPromos));
+
+      result.textContent = 'Награда получена! +' + PROMOCODES[code].coins + ' монет';
+      result.classList.add('show', 'success');
+      input.value = '';
+    } else {
+      result.textContent = 'Неправильный промокод';
+      result.classList.add('show', 'error');
+    }
+  }
+
+  function buildStrip(screenName) {
+    const items = screenName === 'earth' ? EARTH_ITEMS : GOLD_ITEMS;
+    const strip = document.getElementById(screenName + '-strip');
     strip.innerHTML = '';
     for (let i = 0; i < ITEM_COUNT; i++) {
       const item = document.createElement('div');
       item.className = 'roulette-item';
 
-      // Если есть предметы — случайно выбираем один
-      if (ITEMS.length > 0) {
-        const randomItem = ITEMS[Math.floor(Math.random() * ITEMS.length)];
+      if (items.length > 0) {
+        const randomItem = items[Math.floor(Math.random() * items.length)];
         const img = document.createElement('img');
         img.src = randomItem.img;
         img.alt = randomItem.name;
@@ -450,26 +800,55 @@
     document.getElementById('main-screen').classList.remove('active');
     document.getElementById('earth-screen').classList.add('active');
     window.scrollTo(0, 0);
-    buildStrip();
+    buildStrip('earth');
   }
 
-  function goBack() {
-    document.getElementById('earth-screen').classList.remove('active');
+  function openGoldCase() {
+    document.getElementById('main-screen').classList.remove('active');
+    document.getElementById('gold-screen').classList.add('active');
+    window.scrollTo(0, 0);
+    buildStrip('gold');
+  }
+
+  function goBack(screenName) {
+    document.getElementById(screenName + '-screen').classList.remove('active');
     document.getElementById('main-screen').classList.add('active');
     window.scrollTo(0, 0);
   }
 
-  function spinRoulette() {
+  function spinRoulette(screenName) {
     if (isSpinning) return;
+
+    const price = screenName === 'earth' ? EARTH_PRICE : GOLD_PRICE;
+    const resultLabel = document.getElementById(screenName + '-result');
+
+    if (coins < price) {
+      resultLabel.classList.remove('show');
+      resultLabel.textContent = '';
+      resultLabel.classList.add('show');
+      resultLabel.style.color = '#ff4040';
+      resultLabel.textContent = 'Недостаточно средств';
+      setTimeout(() => {
+        resultLabel.classList.remove('show');
+        resultLabel.style.color = '';
+      }, 2000);
+      return;
+    }
+
+    coins -= price;
+    saveCoins();
+    updateCoinDisplay();
+
     isSpinning = true;
 
-    const strip = document.getElementById('roulette-strip');
-    const openButton = document.getElementById('open-button');
-    const resultLabel = document.getElementById('result-label');
+    const items = screenName === 'earth' ? EARTH_ITEMS : GOLD_ITEMS;
+    const strip = document.getElementById(screenName + '-strip');
+    const openButton = document.getElementById(screenName + '-open-button');
 
     openButton.disabled = true;
     resultLabel.classList.remove('show');
     resultLabel.textContent = '';
+    resultLabel.style.color = '';
 
     strip.style.transition = 'none';
     strip.style.transform = 'translateX(0)';
@@ -485,9 +864,8 @@
       strip.style.transform = `translateX(${finalTranslate}px)`;
 
       setTimeout(() => {
-        // Если есть предметы — показываем название, иначе просто "Рамка"
-        const winItem = ITEMS.length > 0
-          ? ITEMS[Math.floor(Math.random() * ITEMS.length)].name
+        const winItem = items.length > 0
+          ? items[Math.floor(Math.random() * items.length)].name
           : 'Рамка';
         resultLabel.textContent = '🎁 ' + winItem + '!';
         resultLabel.classList.add('show');
@@ -496,6 +874,8 @@
       }, SPIN_TIME + 100);
     }, 50);
   }
+
+  updateCoinDisplay();
 </script>
 
 </body>
