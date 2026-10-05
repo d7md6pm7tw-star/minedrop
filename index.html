@@ -569,7 +569,10 @@
   <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
   <div class="side-menu" id="side-menu">
-    <div class="menu-item" onclick="menuClick('Кейсы')">📦 Кейсы</div>
+    <div class="menu-item" onclick="menuClick('Кейсы')">
+      <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/4BF1CCC4-6FCC-410B-A0BE-1BBBA1BA2595.PNG" alt="Кейсы" class="menu-item-icon">
+      Кейсы
+    </div>
     <div class="menu-item" onclick="menuClick('Инвентарь')">
       <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/IMG_9672.PNG" alt="Инвентарь" class="menu-item-icon">
       Инвентарь
@@ -592,7 +595,6 @@
     </div>
   </div>
 
-  <!-- ===== ОКНО ПРОМОКОДОВ ===== -->
   <div class="promo-screen" id="promo-screen">
     <div class="promo-close" onclick="closePromo()">✕</div>
     <div class="promo-box">
@@ -722,9 +724,7 @@
     document.getElementById('overlay').classList.toggle('open');
   }
 
-  function menuClick(name) {
-    // Пока кнопки ничего не делают
-  }
+  function menuClick(name) {}
 
   function openPromo() {
     document.getElementById('side-menu').classList.remove('open');
@@ -763,10 +763,8 @@
       coins += PROMOCODES[code].coins;
       saveCoins();
       updateCoinDisplay();
-
       usedPromos.push(code);
       localStorage.setItem('minedrop_used_promos', JSON.stringify(usedPromos));
-
       result.textContent = 'Награда получена! +' + PROMOCODES[code].coins + ' монет';
       result.classList.add('show', 'success');
       input.value = '';
