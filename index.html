@@ -170,7 +170,7 @@
     display: flex;
   }
 
-  #earth-screen, #gold-screen, #profile-screen, #inventory-screen {
+  #earth-screen, #gold-screen, #profile-screen, #inventory-screen, #auth-screen {
     padding: 40px 20px;
   }
 
@@ -382,6 +382,146 @@
     padding: 40px 0;
   }
 
+  .player-code-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .player-code-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+  }
+
+  .player-code {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffdd44;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    letter-spacing: 2px;
+    user-select: all;
+  }
+
+  .title-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 20px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+  }
+
+  .title-hydra {
+    background: linear-gradient(180deg, #4caf50 0%, #1b5e20 100%);
+    border: 3px solid #0a3d0a;
+  }
+
+  .title-god {
+    background: linear-gradient(180deg, #ffd54f 0%, #ff6f00 100%);
+    border: 3px solid #5d3a00;
+  }
+
+  .title-tiger {
+    background: linear-gradient(180deg, #ff9800 0%, #bf360c 100%);
+    border: 3px solid #4a1200;
+  }
+
+  .auth-box {
+    width: 280px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  .auth-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 3px 3px 0 #3f3f3f;
+    text-align: center;
+    margin: 0 0 10px 0;
+  }
+
+  .auth-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-family: 'Minecraft', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: #2a2a2a;
+    border: 3px solid #8a8a8a;
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 0 #0a0a0a;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+  }
+
+  .auth-input::placeholder {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(180deg, #d9d9d9 0%, #b0b0b0 100%);
+    border: 3px solid #8a8a8a;
+    border-radius: 15px;
+    box-shadow: 3px 3px 0 #3f3f3f, 6px 6px 0 #1a1a1a;
+    cursor: pointer;
+    font-family: 'Minecraft', monospace;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #3f3f3f;
+    user-select: none;
+    box-sizing: border-box;
+  }
+
+  .auth-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #3f3f3f, 2px 2px 0 #1a1a1a;
+  }
+
+  .auth-error {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff4040;
+    text-shadow: 2px 2px 0 #3f0000;
+    min-height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .auth-error.show {
+    opacity: 1;
+  }
+
   .side-menu {
     position: fixed;
     top: 0;
@@ -428,6 +568,11 @@
     object-fit: contain;
     image-rendering: pixelated;
     flex-shrink: 0;
+  }
+
+  .menu-item-tg {
+    background: linear-gradient(180deg, #5eb5f0 0%, #2a8fd4 100%);
+    border: 3px solid #1c5a8a;
   }
 
   .overlay {
@@ -583,6 +728,10 @@
       <img src="https://raw.githubusercontent.com/d7md6pm7tw-star/minedrop/main/IMG_9678.WEBP" alt="Промокоды" class="menu-item-icon">
       Промокоды
     </div>
+    <a href="https://t.me/minedropme" target="_blank" class="menu-item menu-item-tg" style="text-decoration: none; color: #ffffff;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="menu-item-icon">
+      Привязка Telegram
+    </a>
   </div>
 
   <div onclick="toggleMenu()" style="position:fixed;top:20px;left:20px;z-index:999;cursor:pointer;">
@@ -674,10 +823,33 @@
     <button class="back-button" onclick="goBack('inventory')">← Назад</button>
   </div>
 
+  <div id="auth-screen" class="screen">
+    <h1 class="minecraft-title">Аккаунт</h1>
+    <div class="auth-box">
+      <div class="auth-title" id="auth-title">Вход</div>
+      <input type="text" class="auth-input" id="auth-nick" placeholder="Ник" autocomplete="off">
+      <input type="password" class="auth-input" id="auth-pass" placeholder="Пароль" autocomplete="off">
+      <div class="auth-error" id="auth-error"></div>
+      <div class="auth-btn" id="auth-main-btn" onclick="authMainAction()">Войти</div>
+      <div class="auth-btn" id="auth-switch-btn" onclick="switchAuthMode()">Зарегистрироваться</div>
+    </div>
+    <button class="back-button" onclick="goBack('auth')">← Назад</button>
+  </div>
+
   <div id="profile-screen" class="screen">
     <h1 class="minecraft-title">Профиль</h1>
+    <div class="profile-title" id="profile-nick">Ник: —</div>
+
+    <div class="player-code-box">
+      <span class="player-code-label">Твой код:</span>
+      <span class="player-code" id="player-code">— — — —</span>
+    </div>
+
+    <div class="title-badge" id="title-badge" style="display: none;"></div>
+
     <div class="profile-title">Информация:</div>
     <div class="profile-items" id="profile-items"></div>
+    <button class="back-button" onclick="logout()">Выйти из аккаунта</button>
     <button class="back-button" onclick="goBack('profile')">← Назад</button>
   </div>
 
@@ -707,32 +879,80 @@
     '1k': { coins: 1000 }
   };
 
-  let isSpinning = false;
+  // ===== ТИТУЛЫ ПО КОДАМ =====
+  // Сюда вписываешь код игрока и его титул (без дефиса)
+  const TITLES = {
+    // 'A7KM2XQ': 'hydra',
+    // 'B9KL3MP': 'god',
+    // 'C2NP5RT': 'tiger',
+  };
 
-  let coins = parseInt(localStorage.getItem('minedrop_coins'));
-  if (isNaN(coins)) {
-    coins = 100;
-    localStorage.setItem('minedrop_coins', coins);
+  // Названия титулов
+  const TITLE_NAMES = {
+    'hydra': '🐍 Гидра',
+    'god': '⚡ Бог',
+    'tiger': '🐯 Тигр'
+  };
+
+  let isSpinning = false;
+  let authMode = 'login';
+
+  let currentUser = localStorage.getItem('minedrop_current_user') || null;
+  let accounts = JSON.parse(localStorage.getItem('minedrop_accounts') || '{}');
+
+  let coins = 100;
+  let inventory = [];
+
+  if (currentUser && accounts[currentUser]) {
+    coins = accounts[currentUser].coins;
+    inventory = accounts[currentUser].inventory || [];
   }
 
-  let usedPromos = JSON.parse(localStorage.getItem('minedrop_used_promos') || '[]');
-  let inventory = JSON.parse(localStorage.getItem('minedrop_inventory') || '[]');
+  function saveAccount() {
+    if (currentUser && accounts[currentUser]) {
+      accounts[currentUser].coins = coins;
+      accounts[currentUser].inventory = inventory;
+      localStorage.setItem('minedrop_accounts', JSON.stringify(accounts));
+    }
+  }
 
   function updateCoinDisplay() {
     document.getElementById('coin-display').textContent = coins;
   }
 
-  function saveCoins() {
-    localStorage.setItem('minedrop_coins', coins);
-  }
-
-  function saveInventory() {
-    localStorage.setItem('minedrop_inventory', JSON.stringify(inventory));
-  }
+  function saveCoins() { saveAccount(); }
+  function saveInventory() { saveAccount(); }
 
   function toggleMenu() {
     document.getElementById('side-menu').classList.toggle('open');
     document.getElementById('overlay').classList.toggle('open');
+  }
+
+  // ===== ГЕНЕРАЦИЯ КОДА ИГРОКА (7 СИМВОЛОВ) =====
+  function generatePlayerCode() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 7; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  function isCodeUnique(code) {
+    for (let nick in accounts) {
+      if (accounts[nick].code === code) return false;
+    }
+    return true;
+  }
+
+  function generateUniqueCode() {
+    let code = generatePlayerCode();
+    let attempts = 0;
+    while (!isCodeUnique(code) && attempts < 100) {
+      code = generatePlayerCode();
+      attempts++;
+    }
+    return code;
   }
 
   function openCases() {
@@ -743,7 +963,147 @@
     document.getElementById('gold-screen').classList.remove('active');
     document.getElementById('inventory-screen').classList.remove('active');
     document.getElementById('profile-screen').classList.remove('active');
+    document.getElementById('auth-screen').classList.remove('active');
     window.scrollTo(0, 0);
+  }
+
+  function openProfile() {
+    document.getElementById('side-menu').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+    document.getElementById('main-screen').classList.remove('active');
+    document.getElementById('earth-screen').classList.remove('active');
+    document.getElementById('gold-screen').classList.remove('active');
+    document.getElementById('inventory-screen').classList.remove('active');
+
+    if (currentUser) {
+      document.getElementById('profile-screen').classList.add('active');
+      buildProfile();
+    } else {
+      document.getElementById('auth-screen').classList.add('active');
+      authMode = 'login';
+      updateAuthUI();
+    }
+    window.scrollTo(0, 0);
+  }
+
+  function updateAuthUI() {
+    const title = document.getElementById('auth-title');
+    const mainBtn = document.getElementById('auth-main-btn');
+    const switchBtn = document.getElementById('auth-switch-btn');
+
+    if (authMode === 'login') {
+      title.textContent = 'Вход';
+      mainBtn.textContent = 'Войти';
+      switchBtn.textContent = 'Зарегистрироваться';
+    } else {
+      title.textContent = 'Регистрация';
+      mainBtn.textContent = 'Создать аккаунт';
+      switchBtn.textContent = 'У меня есть аккаунт';
+    }
+
+    document.getElementById('auth-error').classList.remove('show');
+    document.getElementById('auth-error').textContent = '';
+    document.getElementById('auth-nick').value = '';
+    document.getElementById('auth-pass').value = '';
+  }
+
+  function switchAuthMode() {
+    authMode = authMode === 'login' ? 'register' : 'login';
+    updateAuthUI();
+  }
+
+  function authMainAction() {
+    const nick = document.getElementById('auth-nick').value.trim();
+    const pass = document.getElementById('auth-pass').value.trim();
+    const errorEl = document.getElementById('auth-error');
+
+    errorEl.classList.remove('show');
+    errorEl.textContent = '';
+
+    if (!nick || !pass) {
+      errorEl.textContent = 'Заполни все поля';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    if (nick.length < 3) {
+      errorEl.textContent = 'Ник минимум 3 символа';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    if (pass.length < 3) {
+      errorEl.textContent = 'Пароль минимум 3 символа';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    if (authMode === 'register') {
+      // 🔒 ПРИВЯЗКА К УСТРОЙСТВУ
+      const deviceOwner = localStorage.getItem('minedrop_device_owner');
+      if (deviceOwner) {
+        errorEl.textContent = 'На этом устройстве уже есть аккаунт: ' + deviceOwner;
+        errorEl.classList.add('show');
+        return;
+      }
+
+      if (accounts[nick]) {
+        errorEl.textContent = 'Такой ник уже есть';
+        errorEl.classList.add('show');
+        return;
+      }
+      const playerCode = generateUniqueCode();
+      accounts[nick] = {
+        password: pass,
+        coins: 0,
+        inventory: [],
+        code: playerCode
+      };
+      localStorage.setItem('minedrop_accounts', JSON.stringify(accounts));
+
+      // Запоминаем владельца устройства
+      localStorage.setItem('minedrop_device_owner', nick);
+
+      currentUser = nick;
+      localStorage.setItem('minedrop_current_user', nick);
+      coins = 0;
+      inventory = [];
+      updateCoinDisplay();
+      document.getElementById('auth-screen').classList.remove('active');
+      document.getElementById('profile-screen').classList.add('active');
+      buildProfile();
+    } else {
+      if (!accounts[nick]) {
+        errorEl.textContent = 'Аккаунт не найден';
+        errorEl.classList.add('show');
+        return;
+      }
+      if (accounts[nick].password !== pass) {
+        errorEl.textContent = 'Неверный пароль';
+        errorEl.classList.add('show');
+        return;
+      }
+      currentUser = nick;
+      localStorage.setItem('minedrop_current_user', nick);
+      coins = accounts[nick].coins;
+      inventory = accounts[nick].inventory || [];
+      updateCoinDisplay();
+      document.getElementById('auth-screen').classList.remove('active');
+      document.getElementById('profile-screen').classList.add('active');
+      buildProfile();
+    }
+  }
+
+  function logout() {
+    currentUser = null;
+    localStorage.removeItem('minedrop_current_user');
+    document.getElementById('profile-screen').classList.remove('active');
+    document.getElementById('auth-screen').classList.add('active');
+    authMode = 'login';
+    updateAuthUI();
+    coins = 100;
+    inventory = [];
+    updateCoinDisplay();
   }
 
   function openPromo() {
@@ -773,6 +1133,11 @@
       return;
     }
 
+    let usedPromos = [];
+    if (currentUser && accounts[currentUser]) {
+      usedPromos = accounts[currentUser].usedPromos || [];
+    }
+
     if (usedPromos.includes(code)) {
       result.textContent = 'Промокод уже использован';
       result.classList.add('show', 'error');
@@ -781,10 +1146,13 @@
 
     if (PROMOCODES[code]) {
       coins += PROMOCODES[code].coins;
-      saveCoins();
       updateCoinDisplay();
-      usedPromos.push(code);
-      localStorage.setItem('minedrop_used_promos', JSON.stringify(usedPromos));
+      if (currentUser && accounts[currentUser]) {
+        accounts[currentUser].coins = coins;
+        if (!accounts[currentUser].usedPromos) accounts[currentUser].usedPromos = [];
+        accounts[currentUser].usedPromos.push(code);
+        localStorage.setItem('minedrop_accounts', JSON.stringify(accounts));
+      }
       result.textContent = 'Награда получена! +' + PROMOCODES[code].coins + ' монет';
       result.classList.add('show', 'success');
       input.value = '';
@@ -852,6 +1220,7 @@
     document.getElementById('earth-screen').classList.remove('active');
     document.getElementById('gold-screen').classList.remove('active');
     document.getElementById('profile-screen').classList.remove('active');
+    document.getElementById('auth-screen').classList.remove('active');
     document.getElementById('inventory-screen').classList.add('active');
     window.scrollTo(0, 0);
     buildInventory();
@@ -875,19 +1244,32 @@
     });
   }
 
-  function openProfile() {
-    document.getElementById('side-menu').classList.remove('open');
-    document.getElementById('overlay').classList.remove('open');
-    document.getElementById('main-screen').classList.remove('active');
-    document.getElementById('earth-screen').classList.remove('active');
-    document.getElementById('gold-screen').classList.remove('active');
-    document.getElementById('inventory-screen').classList.remove('active');
-    document.getElementById('profile-screen').classList.add('active');
-    window.scrollTo(0, 0);
-    buildProfile();
-  }
-
   function buildProfile() {
+    document.getElementById('profile-nick').textContent = 'Ник: ' + currentUser;
+
+    // Если у аккаунта нет кода — генерируем
+    if (accounts[currentUser] && !accounts[currentUser].code) {
+      accounts[currentUser].code = generateUniqueCode();
+      localStorage.setItem('minedrop_accounts', JSON.stringify(accounts));
+    }
+
+    if (accounts[currentUser] && accounts[currentUser].code) {
+      const code = accounts[currentUser].code;
+      const formatted = code.slice(0, 3) + '-' + code.slice(3);
+      document.getElementById('player-code').textContent = formatted;
+    }
+
+    const badge = document.getElementById('title-badge');
+    const code = accounts[currentUser] ? accounts[currentUser].code : null;
+    if (code && TITLES[code]) {
+      const titleKey = TITLES[code];
+      badge.textContent = TITLE_NAMES[titleKey] || titleKey;
+      badge.className = 'title-badge title-' + titleKey;
+      badge.style.display = 'flex';
+    } else {
+      badge.style.display = 'none';
+    }
+
     const container = document.getElementById('profile-items');
     container.innerHTML = '<div class="profile-empty">Монет: ' + coins + '<br>Предметов в инвентаре: ' + inventory.length + '</div>';
   }
